@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.webhook.WebHookManager;
 import org.slf4j.MDC;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,11 @@ import static com.github.domainname.util.ExceptionUtils.logException;
  * @author jeff
  * @date 2019/10/25
  */
+@ConditionalOnProperty("gitlab.enabled")
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class WebhookController {
+public class GitLabController {
 
     private static final String SUCCESS_JSON = "{}";
 

@@ -1,0 +1,5 @@
+spring:
+  application.name: wechat-work-bot
+
+gitlab:
+  enabled: true
