@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.0.RELEASE'
+        gitlab4jVersion = '4.12.14'
+        httpClientVersion = '4.5.7'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.github.domainname'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.gitlab4j:gitlab4j-api:${gitlab4jVersion}")
+    compile("org.apache.httpcomponents:httpclient:${httpClientVersion}")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor('org.projectlombok:lombok')
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor('org.projectlombok:lombok')
+}
