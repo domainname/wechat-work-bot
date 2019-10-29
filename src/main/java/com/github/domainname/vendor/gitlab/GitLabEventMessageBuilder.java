@@ -88,7 +88,7 @@ public abstract class GitLabEventMessageBuilder {
         String pipelineUrl = projectWebUrl + "/pipelines/" + pipelineId;
         String branchUrl = projectWebUrl + "/commits/" + branchName;
 
-        return format("[%s](%s)：Pipeline [#%d](%s) <font color=\"warning\">失败</font>，分支 [%s](%s) by %s",
+        return format("[%s](%s)：Pipeline [#%d](%s) **失败**，分支 [%s](%s) by %s",
                 projectPath, projectWebUrl, pipelineId, pipelineUrl, branchName, branchUrl, userName);
     }
 
