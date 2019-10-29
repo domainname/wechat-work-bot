@@ -3,8 +3,6 @@ package com.github.domainname.vendor.gitlab;
 import lombok.extern.slf4j.Slf4j;
 import org.gitlab4j.api.webhook.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.github.domainname.util.GitUtils.shortenCommitId;
