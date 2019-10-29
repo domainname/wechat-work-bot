@@ -1,5 +1,6 @@
 package com.github.domainname.controller;
 
+import com.github.domainname.WebhookClient;
 import com.github.domainname.vendor.gitlab.GitLabWebhookListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +31,11 @@ public class GitLabController {
     private static final String SUCCESS_JSON = "{}";
 
     private final WebHookManager webHookManager = new WebHookManager();
-    private final GitLabWebhookListener webhookListener;
+    private final WebhookClient webhookClient;
 
     @PostConstruct
     public void init() {
-        webHookManager.addListener(webhookListener);
+        webHookManager.addListener(new GitLabWebhookListener(webhookClient));
     }
 
     @PostMapping("/gitlab/webhook/{key}")
