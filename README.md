@@ -22,5 +22,9 @@
 
 ### GitLab
 
-进入 GitLab 项目的`Settings` ->`Integrations`，URL一栏填写`http://<服务器域名或IP>/gitlab/webhook/<key>`，例如：`http://localhost:8080/gitlab/webhook/1234abcd-1234-abcd-1234-abcd1234`。
+进入 GitLab 项目的`Settings` ->`Integrations`，URL一栏填写`http://<服务器域名或IP>/gitlab/webhook/<key>`，例如：
+
+```
+http://localhost:8080/gitlab/webhook/1234abcd-1234-abcd-1234-abcd1234
+```
 

@@ -9,7 +9,7 @@ import static com.github.domainname.util.GitUtils.shortenCommitId;
 import static java.lang.String.format;
 
 /**
- * 将各种 GitLabEvent 组装成 MarkDown 消息，以便后续发送到企业微信。
+ * 将各种 GitLabEvent 组装成 Markdown 消息，以便后续发送到企业微信。
  *
  * @author jeff
  * @date 2019/10/28
