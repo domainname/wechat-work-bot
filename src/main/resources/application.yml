@@ -1,5 +1,9 @@
 spring:
   application.name: wechat-work-bot
 
+logging:
+  file:
+    name: logs/app.log
+
 gitlab:
   enabled: true
