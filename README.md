@@ -10,6 +10,9 @@
 
   - Push 事件
   - Issue 事件
+  - Merge Request 事件
+  - Note 事件（回复 merge request、issue、commit、snippet）
+  - Pipeline 事件
 
 ## 示例
 
