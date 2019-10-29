@@ -3,6 +3,8 @@ package com.github.domainname.vendor.gitlab;
 import lombok.extern.slf4j.Slf4j;
 import org.gitlab4j.api.webhook.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.github.domainname.util.GitUtils.shortenCommitId;
@@ -54,9 +56,18 @@ public abstract class GitLabEventMessageBuilder {
         Integer mrId = details.getIid();
         String mrTitle = details.getTitle();
         String mrUrl = details.getUrl();
+        String mrState = details.getState();
 
-        return format("%s 合并了 [MR !%d](%s) in [%s](%s)：**%s**",
-                userName, mrId, mrUrl, projectPath, projectWebUrl, mrTitle);
+        String action = null;
+
+        if ("opened".equals(mrState)) {
+            action = "创建了";
+        } else if ("merged".equals(mrState)) {
+            action = "合并了";
+        }
+
+        return format("%s %s [MR !%d](%s) in [%s](%s)：**%s**",
+                userName, action, mrId, mrUrl, projectPath, projectWebUrl, mrTitle);
     }
 
     public static String buildIssueMessage(IssueEvent event) {
