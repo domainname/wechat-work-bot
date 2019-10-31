@@ -54,14 +54,14 @@ public abstract class GitLabEventMessageBuilder {
         Integer mrId = details.getIid();
         String mrTitle = details.getTitle();
         String mrUrl = details.getUrl();
-        String mrState = details.getState();
+        String action = details.getAction();
 
-        String action = null;
-
-        if ("opened".equals(mrState)) {
+        if ("open".equals(action)) {
             action = "创建了";
-        } else if ("merged".equals(mrState)) {
+        } else if ("merge".equals(action)) {
             action = "合并了";
+        } else if ("update".equals(action)) {
+            action = "更新了";
         }
 
         return format("%s %s [MR !%d](%s) in [%s](%s)：**%s**",
