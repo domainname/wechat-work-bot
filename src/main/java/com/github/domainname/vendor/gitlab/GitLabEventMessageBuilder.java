@@ -53,7 +53,6 @@ public abstract class GitLabEventMessageBuilder {
         MergeRequestEvent.ObjectAttributes details = event.getObjectAttributes();
         Integer mrId = details.getIid();
         String mrTitle = details.getTitle();
-        String mrUrl = details.getUrl();
         String action = details.getAction();
 
         if ("open".equals(action)) {
