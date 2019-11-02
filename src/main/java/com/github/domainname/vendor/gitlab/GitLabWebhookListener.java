@@ -5,12 +5,20 @@ import lombok.RequiredArgsConstructor;
 import org.gitlab4j.api.webhook.*;
 import org.slf4j.MDC;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author jeff
  * @date 2019/10/28
  */
 @RequiredArgsConstructor
 public class GitLabWebhookListener implements WebHookListener {
+
+    private static final List<String> NOTABLE_MERGE_REQUEST_ACTIONS = Arrays.asList("open", "merge");
+    private static final List<String> NOTABLE_ISSUE_ACTIONS = Arrays.asList("open", "close", "reopen");
+    private static final List<String> NOTABLE_PIPELINE_STATUS = Arrays.asList("failed");
 
     private final WebhookClient webhookClient;
 
@@ -28,9 +36,8 @@ public class GitLabWebhookListener implements WebHookListener {
 
     @Override
     public void onMergeRequestEvent(MergeRequestEvent event) {
-        // 忽略 open、merge 以外的事件
         String action = event.getObjectAttributes().getAction();
-        if (!"open".equals(action) && !"merge".equals(action)) {
+        if (!NOTABLE_MERGE_REQUEST_ACTIONS.contains(action)) {
             return;
         }
 
@@ -41,6 +48,11 @@ public class GitLabWebhookListener implements WebHookListener {
 
     @Override
     public void onIssueEvent(IssueEvent event) {
+        String action = event.getObjectAttributes().getAction();
+        if (!NOTABLE_ISSUE_ACTIONS.contains(action)) {
+            return;
+        }
+
         String key = MDC.get("key");
         String message = GitLabEventMessageBuilder.buildIssueMessage(event);
         webhookClient.sendMarkdownMessage(key, message);
@@ -48,9 +60,8 @@ public class GitLabWebhookListener implements WebHookListener {
 
     @Override
     public void onPipelineEvent(PipelineEvent event) {
-        // 忽略 pipeline 失败以外的事件
         String status = event.getObjectAttributes().getStatus();
-        if (!"failed".equals(status)) {
+        if (!NOTABLE_PIPELINE_STATUS.contains(status)) {
             return;
         }
 
