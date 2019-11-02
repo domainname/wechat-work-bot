@@ -76,6 +76,17 @@ public abstract class GitLabEventMessageBuilder {
         IssueEvent.ObjectAttributes details = event.getObjectAttributes();
         String issueTitle = details.getTitle();
         String issueUrl = details.getUrl();
+        String action = details.getAction();
+
+        if ("open".equals(action)) {
+            action = "创建了";
+        } else if ("reopen".equals(action)) {
+            action = "打开了";
+        } else if ("update".equals(action)) {
+            action = "更新了";
+        } else if ("close".equals(action)) {
+            action = "关闭了";
+        }
 
         return format("%s 提交了 Issue：[**%s**](%s)",
                 userName, issueTitle, issueUrl);
